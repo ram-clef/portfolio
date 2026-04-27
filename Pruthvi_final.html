@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
+<title>Pruthvi Raj CP – Portfolio · Charcoal + Silver</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<style>
+  :root {
+    --bg: #050507; 
+    --surface: #0f0f0f;
+    --card: #141414;
+    --navy: #ffffff;
+    --teal: #e4e4e7;
+    --teal-light: #f0f0f5;
+    --rose: #f97316;
+    --gold: #fbbf24;
+    --sage: #d4d4d8;
+    --sky: #e2e8f0;
+    --sky2: #d1d5db;
+    --text: #ffffff;
+    --muted: #cbd5e6;
+    --border: rgba(255,255,255,0.12);
+    --shadow: 0 8px 32px rgba(0,0,0,0.5);
+    --shadow-lg: 0 24px 60px rgba(0,0,0,0.6);
+    --shadow-card: 0 4px 24px rgba(0,0,0,0.4);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Interactive Mouse Spotlight */
+  #mouse-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(20, 184, 166, 0.05) 0%, rgba(99, 102, 241, 0.02) 30%, transparent 60%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+    transition: width 0.3s, height 0.3s;
+  }
+
+  /* SLOW MOTION ANIMATED BACKGROUND ORBS */
+  .bg-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(90px);
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.6;
+    animation: floatOrb 20s infinite ease-in-out alternate;
+  }
+  .orb-1 {
+    width: 500px; height: 500px;
+    background: rgba(14, 165, 233, 0.12);
+    top: -10%; left: -10%;
+    animation-duration: 25s;
+  }
+  .orb-2 {
+    width: 600px; height: 600px;
+    background: rgba(139, 92, 246, 0.12);
+    bottom: -20%; right: -10%;
+    animation-duration: 32s;
+    animation-delay: -5s;
+  }
+  .orb-3 {
+    width: 400px; height: 400px;
+    background: rgba(20, 184, 166, 0.1);
+    top: 30%; left: 50%;
+    animation-duration: 28s;
+    animation-delay: -12s;
+  }
+
+  @keyframes floatOrb {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    33% { transform: translate(80px, 60px) scale(1.1) rotate(15deg); }
+    66% { transform: translate(-40px, 120px) scale(0.9) rotate(-10deg); }
+    100% { transform: translate(-80px, -40px) scale(1.05) rotate(5deg); }
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 15% 15%, rgba(255,255,255,0.02) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 10%, rgba(255,255,255,0.02) 0%, transparent 45%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 52px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: #ffffff;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+  }
+  .nav-logo span { color: var(--teal); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    color: var(--sky);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: color 0.2s, text-shadow 0.2s;
+  }
+  .nav-links a:hover { color: #ffffff; text-shadow: 0 0 10px rgba(255,255,255,0.4); }
+  section { position: relative; z-index: 2; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 120px 52px 80px;
+  }
+  .hero-container {
+    max-width: 1200px;
+    display: flex; align-items: center;
+    gap: 80px; flex-wrap: wrap; justify-content: center;
+  }
+
+  /* Larger 3D Profile Card */
+  .profile-3d-wrap {
+    perspective: 1200px;
+    flex-shrink: 0;
+    z-index: 10;
+  }
+  .profile-3d-card {
+    width: 360px;
+    background: #111111;
+    border-radius: 32px;
+    padding: 40px 30px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+    transform-style: preserve-3d;
+    border: 1px solid rgba(255,255,255,0.15);
+    text-align: center;
+    position: relative;
+    will-change: transform;
+  }
+  .profile-3d-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 32px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent 60%);
+    pointer-events: none;
+  }
+  .profile-3d-card::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: 10%; right: 10%; height: 30px;
+    background: radial-gradient(ellipse, rgba(0,0,0,0.5) 0%, transparent 70%);
+    filter: blur(10px);
+    z-index: -1;
+  }
+  
+  /* IMAGE CONTAINER */
+  .profile-avatar-box {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 3px solid var(--teal);
+    box-shadow: 0 0 0 6px rgba(255,255,255,0.05), 0 15px 35px rgba(0,0,0,0.6);
+    margin: 0 auto 20px;
+    overflow: hidden;
+    transform: translateZ(60px); 
+    transition: transform 0.3s, box-shadow 0.3s;
+    background: #1e1e1e;
+  }
+  .profile-avatar-box:hover {
+    box-shadow: 0 0 0 8px rgba(255,255,255,0.1), 0 20px 45px rgba(0,0,0,0.8);
+  }
+  .profile-avatar-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .profile-name-card {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 6px;
+    transform: translateZ(40px);
+  }
+  .profile-role-card {
+    font-size: 0.85rem;
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    transform: translateZ(30px);
+  }
+  .profile-location {
+    font-size: 0.8rem;
+    color: #ffffff;
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+    transform: translateZ(20px);
+  }
+  .profile-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent);
+    margin: 18px 0;
+    opacity: 0.4;
+    transform: translateZ(10px);
+  }
+  
+  /* FIXED: Stat Row Shading Removed & Enhanced Contrast */
+  .profile-stat-row {
+    display: flex; justify-content: space-around;
+    margin-top: 10px;
+    transform: translateZ(50px);
+    background: rgba(0, 0, 0, 0.4);
+    padding: 15px 5px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  }
+  .p-stat { text-align: center; }
+  
+  /* FIXED: Removed the blurry white shadow that caused the 'shaded' look */
+  .p-stat-num { 
+    font-family: 'DM Mono', monospace; 
+    font-size: 1.6rem; 
+    font-weight: 900; 
+    color: #ffffff !important; 
+    text-shadow: 0 2px 4px rgba(0,0,0,0.6); 
+  }
+  .p-stat-label { 
+    font-size: 0.7rem; 
+    color: #ffffff !important; 
+    text-transform: uppercase; 
+    letter-spacing: 0.5px; 
+    font-weight: 700; 
+  }
+
+  .hero-inner { flex: 1; max-width: 600px; }
+  .hero-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--teal);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    border-radius: 30px;
+    margin-bottom: 22px;
+    background: rgba(255,255,255,0.05);
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+  .hero-name .accent { color: var(--teal); }
+  .hero-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    color: #e2e8f0;
+    margin-bottom: 18px;
+    letter-spacing: 0.3px;
+  }
+  .hero-desc {
+    font-size: 1rem;
+    color: #cbd5e6;
+    line-height: 1.75;
+    margin-bottom: 36px;
+    font-weight: 300;
+  }
+  .hero-links { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 26px;
+    border-radius: 40px;
+    font-size: 0.83rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.28s cubic-bezier(.23,1.15,.32,1);
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-primary {
+    background: #ffffff;
+    color: #0a0a0a;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(255,255,255,0.3); background: #e4e4e7; }
+  .btn-teal {
+    background: var(--teal);
+    color: #0a0a0a;
+    box-shadow: 0 4px 18px rgba(228,228,231,0.2);
+  }
+  .btn-teal:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(255,255,255,0.3); background: #ffffff; }
+  .btn-outline {
+    background: transparent;
+    color: #ffffff;
+    border: 1.5px solid rgba(255,255,255,0.25);
+  }
+  .btn-outline:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255,255,255,0.1); }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: flex; justify-content: center; gap: 0;
+    background: rgba(10,10,10,0.8);
+    backdrop-filter: blur(10px);
+    flex-wrap: wrap;
+    overflow: hidden;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .stat {
+    text-align: center;
+    padding: 36px 48px;
+    flex: 1; min-width: 140px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+    transition: background 0.3s;
+  }
+  .stat:hover { background: rgba(255,255,255,0.05); }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #ffffff !important;
+    line-height: 1;
+    text-shadow: 0 0 15px rgba(255,255,255,0.3);
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    color: #ffffff !important;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+
+  /* SECTIONS */
+  .section-wrap { max-width: 1200px; margin: 0 auto; padding: 90px 52px; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--teal);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: #ffffff;
+    margin-bottom: 52px;
+  }
+  .section-title span { color: var(--teal); }
+
+  /* PROJECT TABS */
+  .tab-nav {
+    display: flex; gap: 6px;
+    margin-bottom: 40px;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    padding: 10px 22px;
+    background: none; border: none;
+    color: var(--sky);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem; font-weight: 700;
+    cursor: pointer;
+    border-bottom: 2.5px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-radius: 6px 6px 0 0;
+  }
+  .tab-btn.active { color: #ffffff; border-bottom-color: #ffffff; background: rgba(255,255,255,0.08); }
+  .tab-btn:hover:not(.active) { color: #ffffff; background: rgba(255,255,255,0.04); }
+  .tab-content { display: none; }
+  .tab-content.active {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  /* PROJECT CARDS */
+  .project-card {
+    background: rgba(20,20,20,0.6);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 28px;
+    transition: transform 0.35s cubic-bezier(.23,1.15,.32,1), box-shadow 0.35s, border-color 0.3s;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, #e4e4e7, #a1a1aa);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .project-card:hover {
+    transform: translateY(-10px) scale(1.01);
+    box-shadow: 0 28px 56px rgba(0,0,0,0.6);
+    border-color: rgba(255,255,255,0.25);
+  }
+  .project-card:hover::before { opacity: 1; }
+  
+  /* BRIGHTENED PROJECT TAGS */
+  .project-type {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 14px; border-radius: 20px;
+    margin-bottom: 16px; font-weight: 700;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
+  .type-office  { background: rgba(14, 165, 233, 0.25); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.5); }
+  .type-kotlin  { background: rgba(139, 92, 246, 0.25); color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.5); }
+  .type-personal{ background: rgba(59, 130, 246, 0.25); color: #60a5fa; border: 1px solid rgba(96, 165, 250, 0.5); }
+  .type-govt    { background: rgba(34, 197, 94, 0.25); color: #86efac; border: 1px solid rgba(134, 239, 172, 0.5); }
+  .type-free    { background: rgba(249, 115, 22, 0.25); color: #fdba74; border: 1px solid rgba(253, 186, 116, 0.5); }
+  
+  .project-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: #ffffff; margin-bottom: 10px; }
+  .project-desc { font-size: 0.83rem; color: #e2e8f0; line-height: 1.65; margin-bottom: 14px; }
+  .project-features { list-style: none; margin-bottom: 16px; }
+  .project-features li {
+    font-size: 0.8rem; color: #cbd5e6;
+    padding: 3px 0 3px 18px; position: relative; line-height: 1.5;
+  }
+  .project-features li::before { content: '›'; position: absolute; left: 0; color: #ffffff; font-size: 1rem; font-weight: 700; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+  .tag {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    padding: 3px 10px; border-radius: 20px;
+    background: rgba(255,255,255,0.07); color: #e2e8f0;
+    border: 1px solid rgba(255,255,255,0.14);
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 20px;
+  }
+  .skill-group {
+    background: rgba(20,20,20,0.6);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 24px 22px;
+    box-shadow: var(--shadow-card);
+    transition: all 0.3s cubic-bezier(.23,1.15,.32,1);
+    position: relative; overflow: hidden;
+  }
+  .skill-group::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--teal), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .skill-group:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 20px 48px rgba(0,0,0,0.6); border-color: rgba(255,255,255,0.25); }
+  .skill-group:hover::after { opacity: 1; }
+  .skill-group-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem; color: #ffffff;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    margin-bottom: 14px; font-weight: 500;
+  }
+  .skill-list { list-style: none; }
+  .skill-list li {
+    font-size: 0.83rem; color: #e2e8f0;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-weight: 400;
+  }
+  .skill-list li:last-child { border-bottom: none; }
+
+  /* CERTIFICATES */
+  #certs { background: rgba(5,5,5,0.8); }
+  #certs .section-title { color: #ffffff; }
+  #certs .section-title span { color: var(--teal); }
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  .cert-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 24px 22px;
+    display: flex; align-items: flex-start; gap: 16px;
+    transition: all 0.3s cubic-bezier(.23,1.15,.32,1);
+    position: relative; overflow: hidden;
+  }
+  .cert-card::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 80px; height: 80px;
+    background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
+  }
+  .cert-card:hover { transform: translateY(-6px); background: rgba(255,255,255,0.08); box-shadow: 0 20px 40px rgba(0,0,0,0.6); border-color: rgba(255,255,255,0.25); }
+  .cert-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .cert-name { font-size: 0.9rem; font-weight: 600; color: #ffffff; margin-bottom: 4px; line-height: 1.3; }
+  .cert-issuer { font-size: 0.72rem; color: #cbd5e6; font-family: 'DM Mono', monospace; }
+  .cert-badge {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 0.6rem;
+    padding: 2px 10px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.1);
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* TIMELINE */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: flex; gap: 32px;
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    transition: transform 0.3s;
+  }
+  .timeline-item:hover { transform: translateX(10px); }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-left { width: 180px; flex-shrink: 0; }
+  .timeline-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem; color: #ffffff;
+    letter-spacing: 0.5px; font-weight: 500; margin-bottom: 6px;
+  }
+  .timeline-company { font-size: 0.78rem; color: #cbd5e6; font-weight: 500; }
+  .timeline-right { flex: 1; }
+  .timeline-role { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: #ffffff; margin-bottom: 12px; }
+  .timeline-points { list-style: none; }
+  .timeline-points li {
+    font-size: 0.83rem; color: #e2e8f0;
+    padding: 4px 0 4px 18px; position: relative; line-height: 1.6;
+  }
+  .timeline-points li::before { content: '›'; position: absolute; left: 0; color: #ffffff; font-size: 1rem; font-weight: 700; }
+
+  /* CONTACT */
+  #contact { background: linear-gradient(135deg, rgba(5,5,7,0.8) 0%, rgba(30,30,40,0.6) 100%); backdrop-filter: blur(10px); }
+
+  footer {
+    background: #030303;
+    color: #cbd5e6;
+    text-align: center;
+    padding: 28px;
+    font-size: 0.78rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.5px;
+  }
+  footer a { color: #ffffff; text-decoration: none; transition: 0.2s; }
+  footer a:hover { color: var(--teal); text-decoration: underline; }
+
+  /* REVEAL ANIMATION */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .nav-links { gap: 14px; }
+    #hero { padding: 100px 20px 60px; }
+    .hero-container { gap: 36px; }
+    .section-wrap { padding: 60px 24px; }
+    .stats-bar { }
+    .stat { padding: 28px 20px; }
+    .timeline-item { flex-direction: column; gap: 8px; }
+    .timeline-item:hover { transform: none; }
+    .timeline-left { width: 100%; }
+    .profile-3d-card { width: 320px; padding: 35px 20px; }
+    .profile-avatar-box { width: 160px; height: 160px; }
+    #mouse-glow { display: none; } 
+    .bg-orb { display: none; } /* Hide orbs on mobile for performance */
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-orb orb-1"></div>
+<div class="bg-orb orb-2"></div>
+<div class="bg-orb orb-3"></div>
+
+<div id="mouse-glow"></div>
+
+<nav>
+  <a class="nav-logo" href="#">Pruthvi<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certs">Certifications</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-container">
+
+    <div class="profile-3d-wrap reveal">
+      <div class="profile-3d-card" id="tilt-card">
+        
+        <div class="profile-avatar-box">
+          <img src="WhatsApp Image 2026-04-22 at 12.03.20 PM.jpeg" alt="Pruthvi Raj CP" onerror="this.src='https://via.placeholder.com/200?text=Pruthvi'">
+        </div>
+
+        <div class="profile-name-card">Pruthvi Raj CP</div>
+        <div class="profile-role-card">Team Lead · Android</div>
+        <div class="profile-location"><i class="fas fa-map-marker-alt" style="color:var(--teal);font-size:0.7rem"></i> Bengaluru, India</div>
+        <div class="profile-divider"></div>
+        <div class="profile-stat-row">
+          <div class="p-stat"><div class="p-stat-num">7+</div><div class="p-stat-label">Years</div></div>
+          <div class="p-stat"><div class="p-stat-num">15+</div><div class="p-stat-label">Projects</div></div>
+          <div class="p-stat"><div class="p-stat-num">5</div><div class="p-stat-label">Certs</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-inner">
+      <div class="hero-tag reveal">✦ Team Lead · Android · Fintech · GovTech ✦</div>
+      <h1 class="hero-name reveal">Pruthvi <span class="accent">Raj</span> CP</h1>
+      <p class="hero-title reveal">Team Lead | Android · Kotlin · Java · Spring Boot | Bengaluru</p>
+      <p class="hero-desc reveal">7+ years shipping high-impact Android apps — from banking fintech platforms processing lakhs of transactions, to government e-governance systems. Currently leading the Android team at Integra Micro Systems, architecting clean MVVM solutions and delivering full-stack excellence.</p>
+      <div class="hero-links reveal">
+        <a class="btn btn-primary" href="https://www.linkedin.com/in/pruthviraj-cp" target="_blank">
+          <i class="fab fa-linkedin-in"></i> LinkedIn
+        </a>
+        <a class="btn btn-teal" href="mailto:raj.pruthvicp@gmail.com">
+          <i class="far fa-envelope"></i> Email Me
+        </a>
+        <a class="btn btn-outline" href="tel:+918904061927">
+          <i class="fas fa-phone-alt"></i> Call
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stat reveal"><div class="stat-num" id="s0">7+</div><div class="stat-label">Years Experience</div></div>
+  <div class="stat reveal"><div class="stat-num" id="s1">15+</div><div class="stat-label">Projects Shipped</div></div>
+  <div class="stat reveal"><div class="stat-num" id="s2">4</div><div class="stat-label">Companies</div></div>
+  <div class="stat reveal"><div class="stat-num" id="s3">5</div><div class="stat-label">Certifications</div></div>
+  <div class="stat reveal"><div class="stat-num" id="s4">3</div><div class="stat-label">Freelance Apps</div></div>
+</div>
+
+<section id="projects">
+  <div class="section-wrap">
+    <div class="section-label reveal">// featured work</div>
+    <h2 class="section-title reveal">Projects · <span>Real Impact</span></h2>
+    <div class="tab-nav reveal">
+      <button class="tab-btn active" onclick="switchTab('office')">🏢 Office Projects</button>
+      <button class="tab-btn" onclick="switchTab('personal')">💡 Personal</button>
+      <button class="tab-btn" onclick="switchTab('freelance')">💼 Freelance</button>
+      <button class="tab-btn" onclick="switchTab('govt')">🏛️ Government</button>
+    </div>
+
+    <div id="tab-office" class="tab-content active">
+      <div class="project-card reveal">
+        <span class="project-type type-office">Fintech · Java · Integra Micro</span>
+        <h3 class="project-title">IBKART</h3>
+        <p class="project-desc">Enterprise fintech platform enabling rural banking agents to offer DMT, AEPS, bill payments, loans, travel booking.</p>
+        <ul class="project-features">
+          <li>Domestic Money Transfer & real-time reconciliation</li>
+          <li>AEPS, MATM, Aadhaar eKYC, IRCTC integration</li>
+          <li>MVVM architecture + Spring Boot microservices</li>
+          <li>Keycloak auth, OneSignal push, AES encryption</li>
+        </ul>
+        <div class="project-tags"><span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Keycloak</span><span class="tag">MVVM</span></div>
+      </div>
+      <div class="project-card reveal">
+        <span class="project-type type-office">OCR · Java · ERBrains</span>
+        <h3 class="project-title">Business Card Reader</h3>
+        <p class="project-desc">ML Kit text recognition to auto-extract name, phone, email from business cards & sync to SQL Server.</p>
+        <ul class="project-features">
+          <li>Google ML Kit real-time scanning</li>
+          <li>Intelligent field classification</li>
+          <li>C# REST services + stored procedures</li>
+          <li>Firebase Auth + push notifications</li>
+        </ul>
+        <div class="project-tags"><span class="tag">Java</span><span class="tag">ML Kit</span><span class="tag">C#</span><span class="tag">SQL Server</span></div>
+      </div>
+      <div class="project-card reveal">
+        <span class="project-type type-office">Voice AI · Java · ERBrains</span>
+        <h3 class="project-title">Smart ERB</h3>
+        <p class="project-desc">Voice-controlled warehouse inventory app integrated with Microsoft NAVISION ERP.</p>
+        <ul class="project-features">
+          <li>Speech-to-Text for hands-free queries</li>
+          <li>Firebase Text-to-Speech for voice output</li>
+          <li>NAVISION integration via C# middleware</li>
+        </ul>
+        <div class="project-tags"><span class="tag">Java</span><span class="tag">NAVISION</span><span class="tag">Firebase TTS</span><span class="tag">C#</span></div>
+      </div>
+      <div class="project-card reveal">
+        <span class="project-type type-kotlin">Banking · Kotlin · Integra Micro</span>
+        <h3 class="project-title">iLoanRepayment</h3>
+        <p class="project-desc">Field loan recovery app — agents collect repayments on-site, sync offline to bank core system.</p>
+        <ul class="project-features">
+          <li>Taluk-based customer assignment</li>
+          <li>Offline-capable with auto-sync</li>
+          <li>Kotlin + Coroutines + MVVM</li>
+        </ul>
+        <div class="project-tags"><span class="tag">Kotlin</span><span class="tag">Coroutines</span><span class="tag">Offline Sync</span></div>
+      </div>
+      <div class="project-card reveal">
+        <span class="project-type type-kotlin">Attendance · Kotlin · Integra Micro</span>
+        <h3 class="project-title">iASWeb – Smart Attendance</h3>
+        <p class="project-desc">QR + TOTP based attendance for bank employees — prevents buddy punching.</p>
+        <ul class="project-features">
+          <li>Dynamic QR code, time-based OTP</li>
+          <li>Location & branch verification</li>
+          <li>Real-time admin dashboard, payroll integration</li>
+        </ul>
+        <div class="project-tags"><span class="tag">Kotlin</span><span class="tag">TOTP</span><span class="tag">QR Code</span><span class="tag">MVVM</span></div>
+      </div>
+    </div>
+
+    <div id="tab-personal" class="tab-content">
+      <div class="project-card reveal">
+        <span class="project-type type-personal">Security · Offline</span>
+        <h3 class="project-title">Password Bag</h3>
+        <p class="project-desc">100% offline, AES-encrypted password manager with CSV backup & cross-device restore.</p>
+        <ul class="project-features">
+          <li>No internet, zero cloud, no data collection</li>
+          <li>6-digit secret key, AES encryption</li>
+          <li>Backup to CSV, encrypted share</li>
+        </ul>
+        <div class="project-tags"><span class="tag">AES</span><span class="tag">Offline-first</span><span class="tag">CSV Backup</span></div>
+      </div>
+      <div class="project-card reveal">
+        <span class="project-type type-personal">Finance · Nidhi</span>
+        <h3 class="project-title">Nidhi – Smart Money Manager</h3>
+        <p class="project-desc">Expense tracker with manual entry, screenshot reader, interactive charts, QR transfer and Google Drive backup.</p>
+        <ul class="project-features">
+          <li>Manual entry & screenshot reader for fast tracking</li>
+          <li>QR code full data transfer (offline)</li>
+          <li>Interactive expense charts & cloud backup via Gmail</li>
+        </ul>
+        <div class="project-tags"><span class="tag">QR transfer</span><span class="tag">Charts & Analytics</span><span class="tag">Google Drive</span></div>
+      </div>
+      <div class="project-card reveal">
+        <span class="project-type type-personal">Hyperlocal · Kisan Point</span>
+        <h3 class="project-title">Kisan Point</h3>
+        <p class="project-desc">Veggie ordering platform with customer, admin, delivery agent apps, UPI payment, geofencing.</p>
+        <ul class="project-features">
+          <li>Area-locked delivery zone, order tracking</li>
+          <li>Admin panel for order assignment</li>
+          <li>UPI gateway, push notifications</li>
+        </ul>
+        <div class="project-tags"><span class="tag">UPI</span><span class="tag">Geofencing</span><span class="tag">Multi-role</span></div>
+      </div>
+    </div>
+
+    <div id="tab-freelance" class="tab-content">
+      <div class="project-card reveal">
+        <span class="project-type type-free">Postal Management</span>
+        <h3 class="project-title">E-Post Office</h3>
+        <p class="project-desc">Digital postal tracking system replacing manual registers, with role-based dashboard.</p>
+        <ul class="project-features">
+          <li>Track parcels end-to-end</li>
+          <li>Admin reports & agent logs</li>
+          <li>C# + SQL Server + NGROK tunneling</li>
+        </ul>
+        <div class="project-tags"><span class="tag">C#</span><span class="tag">SQL Server</span><span class="tag">NGROK</span></div>
+      </div>
+      <div class="project-card reveal">
+        <span class="project-type type-free">Tournament Manager</span>
+        <h3 class="project-title">Battle Royale</h3>
+        <p class="project-desc">PUBG tournament platform: registrations, live scoreboard, prize pool & payment tracking.</p>
+        <ul class="project-features">
+          <li>Dynamic leaderboard, entry fee tracking</li>
+          <li>Match verification & dispute resolution</li>
+          <li>C# backend + real-time scoring</li>
+        </ul>
+        <div class="project-tags"><span class="tag">Live Scoring</span><span class="tag">Tournament</span><span class="tag">C#</span></div>
+      </div>
+      <div class="project-card reveal">
+        <span class="project-type type-free">Catering CRM</span>
+        <h3 class="project-title">Cater EYE</h3>
+        <p class="project-desc">Order & client tracking with Firebase realtime, Zing charts for revenue analytics.</p>
+        <ul class="project-features">
+          <li>Event-based orders, payment tracker</li>
+          <li>Multi-user: manager + delivery staff</li>
+          <li>Monthly reports & top items analytics</li>
+        </ul>
+        <div class="project-tags"><span class="tag">Firebase DB</span><span class="tag">Zing Charts</span><span class="tag">CRM</span></div>
+      </div>
+    </div>
+
+    <div id="tab-govt" class="tab-content">
+      <div class="project-card reveal">
+        <span class="project-type type-govt">AgriTech · NIC</span>
+        <h3 class="project-title">Seeds Kit Distribution</h3>
+        <p class="project-desc">Land record verification & auto seed allotment for Karnataka farmers.</p>
+        <ul class="project-features">
+          <li>GPS-tagged land verification</li>
+          <li>Aadhaar-linked farmer ID, duplicate prevention</li>
+          <li>Admin dashboard for allotment reporting</li>
+        </ul>
+        <div class="project-tags"><span class="tag">C#</span><span class="tag">GPS</span><span class="tag">e-Governance</span></div>
+      </div>
+      <div class="project-card reveal">
+        <span class="project-type type-govt">Election Monitoring</span>
+        <h3 class="project-title">Poll Day Monitoring System</h3>
+        <p class="project-desc">Real-time voter turnout tracking, booth heatmaps, incident reporting for election officers.</p>
+        <ul class="project-features">
+          <li>2-hour interval data entries</li>
+          <li>Role hierarchy: booth → sector → RO</li>
+          <li>Auto-generated final reports for EC</li>
+        </ul>
+        <div class="project-tags"><span class="tag">Live Reports</span><span class="tag">Role-Based</span><span class="tag">C#</span></div>
+      </div>
+      <div class="project-card reveal">
+        <span class="project-type type-govt">Citizen Services</span>
+        <h3 class="project-title">Appointment Management System</h3>
+        <p class="project-desc">Book appointments with DC/ADC/CEO online, Aadhaar verification & reminders.</p>
+        <ul class="project-features">
+          <li>Slot calendar, live availability</li>
+          <li>SMS + push notifications</li>
+          <li>Admin rescheduling & walk-in slots</li>
+        </ul>
+        <div class="project-tags"><span class="tag">e-Governance</span><span class="tag">Aadhaar</span><span class="tag">C#</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" style="background: rgba(255,255,255,0.02);">
+  <div class="section-wrap">
+    <div class="section-label reveal">// toolkit</div>
+    <h2 class="section-title reveal">Technical <span>Arsenal</span></h2>
+    <div class="skills-grid">
+      <div class="skill-group reveal"><div class="skill-group-title">📱 Mobile</div><ul class="skill-list"><li>Android · Kotlin</li><li>Android · Java</li><li>MVVM + Coroutines</li><li>Jetpack Compose (basic)</li><li>Flutter basics</li></ul></div>
+      <div class="skill-group reveal"><div class="skill-group-title">⚙️ Backend</div><ul class="skill-list"><li>Spring Boot / Microservices</li><li>REST APIs</li><li>C# / .NET</li><li>Keycloak / OAuth2</li><li>OpenAPI Generator</li></ul></div>
+      <div class="skill-group reveal"><div class="skill-group-title">🗄️ Database</div><ul class="skill-list"><li>SQL Server, Stored Procs</li><li>Firebase Realtime DB</li><li>MS NAVISION</li></ul></div>
+      <div class="skill-group reveal"><div class="skill-group-title">🔐 Security</div><ul class="skill-list"><li>AES Encryption</li><li>TOTP (RFC 6238)</li><li>OTP / Aadhaar eKYC</li><li>Keycloak IAM</li></ul></div>
+      <div class="skill-group reveal"><div class="skill-group-title">🔌 APIs & SDKs</div><ul class="skill-list"><li>Google ML Kit</li><li>OneSignal Push</li><li>UPI Payment Gateway</li><li>Zxing QR</li></ul></div>
+      <div class="skill-group reveal"><div class="skill-group-title">🛠️ DevOps & Tools</div><ul class="skill-list"><li>Docker</li><li>Git / SVN</li><li>Postman / Swagger</li><li>Jira / NGROK</li><li>Zoho Projects</li></ul></div>
+      <div class="skill-group reveal"><div class="skill-group-title">🤖 AI & Productivity</div><ul class="skill-list"><li>ChatGPT & AI Tools</li><li>GitHub Copilot</li><li>Figma (Components)</li><li>Android Studio / IntelliJ</li></ul></div>
+      <div class="skill-group reveal"><div class="skill-group-title">👑 Leadership</div><ul class="skill-list"><li>Team Lead</li><li>Lean Six Sigma (Yellow Belt)</li><li>Agile / Scrum</li><li>Code Review & Mentoring</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-wrap">
+    <div class="section-label reveal">// career path</div>
+    <h2 class="section-title reveal">Experience & <span>Leadership</span></h2>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-left">
+          <div class="timeline-period">Nov 2024 – Present</div>
+          <div class="timeline-company">Integra Micro Systems · Bengaluru</div>
+        </div>
+        <div class="timeline-right">
+          <div class="timeline-role">Team Lead – Android</div>
+          <ul class="timeline-points">
+            <li>Leading the Android team, driving architecture decisions and delivery</li>
+            <li>Mentoring junior developers, conducting code reviews</li>
+            <li>Managed agile workflows via Zoho Projects & Jira (assigning issues, creating tasks, dashboards)</li>
+            <li>Coordinating with cross-functional teams on fintech platform features</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-left">
+          <div class="timeline-period">Aug 2022 – Aug 2024</div>
+          <div class="timeline-company">Integra Micro Systems · Bengaluru</div>
+        </div>
+        <div class="timeline-right">
+          <div class="timeline-role">Senior Software Engineer – Android</div>
+          <ul class="timeline-points">
+            <li>Led Android development for IBKART fintech platform (DMT, AEPS, eKYC, IRCTC)</li>
+            <li>Built iLoanRepayment in Kotlin + offline sync, iASWeb attendance with TOTP+QR</li>
+            <li>Architected MVVM + Coroutines, integrated Spring Boot microservices, Keycloak</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-left">
+          <div class="timeline-period">Aug 2020 – Aug 2022</div>
+          <div class="timeline-company">Integra Micro Systems · Bengaluru</div>
+        </div>
+        <div class="timeline-right">
+          <div class="timeline-role">Software Engineer – Android</div>
+          <ul class="timeline-points">
+            <li>Developed and maintained core Android modules for enterprise clients</li>
+            <li>Delivered production-grade features in Java and Kotlin</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-left">
+          <div class="timeline-period">Feb 2020 – Jul 2020</div>
+          <div class="timeline-company">ERBrains IT Solutions · Bengaluru</div>
+        </div>
+        <div class="timeline-right">
+          <div class="timeline-role">Full Stack Android Developer</div>
+          <ul class="timeline-points">
+            <li>Business Card Reader (ML Kit + C# backend) & Smart ERB voice-controlled NAVISION app</li>
+            <li>End-to-end development: Android, backend services, SQL Server, deployment</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-left">
+          <div class="timeline-period">Aug 2018 – Feb 2020</div>
+          <div class="timeline-company">NIC, Govt of India · Karnataka</div>
+        </div>
+        <div class="timeline-right">
+          <div class="timeline-role">District e-Governance Programmer</div>
+          <ul class="timeline-points">
+            <li>Shipped 4 government digital transformation apps across Karnataka</li>
+            <li>Full-stack: Android + C# REST + SQL Server — live deployment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education" style="background: rgba(255,255,255,0.02);">
+  <div class="section-wrap">
+    <div class="section-label reveal">// academic background</div>
+    <h2 class="section-title reveal">Education & <span>Degrees</span></h2>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-left">
+          <div class="timeline-period">2015 – 2018</div>
+          <div class="timeline-company">Bangalore University</div>
+        </div>
+        <div class="timeline-right">
+          <div class="timeline-role">Master of Computer Applications (MCA)</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-left">
+          <div class="timeline-period">2012 – 2015</div>
+          <div class="timeline-company">Seshadripuram First Grade College, Yelahanka</div>
+        </div>
+        <div class="timeline-right">
+          <div class="timeline-role">Bachelor of Computer Application (BCA)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-wrap" style="text-align: center;">
+    <div class="section-label reveal" style="display: inline-block;">// let's connect</div>
+    <h2 class="section-title reveal" style="text-align: center;">Collaborate & <span>Build</span></h2>
+    <p class="reveal" style="max-width: 560px; margin: 0 auto 40px; color: var(--sky); font-size: 1rem; line-height: 1.75;">Open for senior Android roles, freelance contracts, or tech consulting. 7+ years of real-world impact from banking to governance. Currently leading teams at Integra Micro Systems.</p>
+    <div class="hero-links reveal" style="justify-content: center;">
+      <a class="btn btn-primary" href="mailto:raj.pruthvicp@gmail.com"><i class="far fa-envelope"></i> raj.pruthvicp@gmail.com</a>
+      <a class="btn btn-teal" href="https://www.linkedin.com/in/pruthviraj-cp" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn Profile</a>
+      <a class="btn btn-outline" href="tel:+918904061927"><i class="fas fa-phone-alt"></i> +91 8904061927</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Pruthvi Raj CP · Team Lead & Senior Android Developer · <a href="https://www.linkedin.com/in/pruthviraj-cp" target="_blank">linkedin.com/in/pruthviraj-cp</a> · 7+ years of shipping excellence</p>
+</footer>
+
+<script>
+  // 1. Reveal Animation
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), (i % 6) * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+
+  // 2. Tab Logic
+  const TABS = ['office', 'personal', 'freelance', 'govt'];
+  function switchTab(name) {
+    document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+      btn.classList.toggle('active', TABS[idx] === name);
+    });
+    document.querySelectorAll('.tab-content').forEach(c => {
+      c.classList.toggle('active', c.id === 'tab-' + name);
+    });
+    document.querySelectorAll('#tab-' + name + ' .reveal').forEach((el, i) => {
+      el.classList.remove('visible');
+      setTimeout(() => el.classList.add('visible'), 60 + i * 90);
+    });
+  }
+
+  // 3. Counter animation
+  const statsObserver = new IntersectionObserver(entries => {
+    if (!entries[0].isIntersecting) return;
+    [['s0','7+'],['s1','15+'],['s2','4'],['s3','5'],['s4','3']].forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const targetNum = parseFloat(val);
+      const suffix = String(val).replace(/[\d.]/g,'');
+      let current = 0;
+      const step = targetNum / 30;
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= targetNum) { el.textContent = val; clearInterval(timer); }
+        else { el.textContent = Math.floor(current) + suffix; }
+      }, 35);
+    });
+    statsObserver.disconnect();
+  }, { threshold: 0.5 });
+  const statsBar = document.querySelector('.stats-bar');
+  if (statsBar) statsObserver.observe(statsBar);
+
+  window.switchTab = switchTab;
+
+  // 4. 3D Mouse Movement Tilt Logic
+  const card = document.getElementById('tilt-card');
+  const wrap = document.querySelector('.profile-3d-wrap');
+
+  if(wrap && card) {
+    wrap.addEventListener('mousemove', (e) => {
+      const rect = wrap.getBoundingClientRect();
+      const x = e.clientX - rect.left; 
+      const y = e.clientY - rect.top;  
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = ((y - centerY) / centerY) * -15; 
+      const rotateY = ((x - centerX) / centerX) * 15;
+      
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    wrap.addEventListener('mouseleave', () => {
+      card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+      card.style.transition = "transform 0.5s ease";
+    });
+
+    wrap.addEventListener('mouseenter', () => {
+      card.style.transition = "none";
+    });
+  }
+
+  // 5. Interactive Mouse Spotlight Logic
+  const mouseGlow = document.getElementById('mouse-glow');
+  window.addEventListener('mousemove', (e) => {
+    if(window.innerWidth > 768) { // Only animate on desktop
+      requestAnimationFrame(() => {
+        mouseGlow.style.transform = `translate(${e.clientX - 400}px, ${e.clientY - 400}px)`;
+      });
+    }
+  });
+
+</script>
+</body>
+</html>
