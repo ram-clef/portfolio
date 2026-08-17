@@ -678,7 +678,7 @@
         <div class="profile-divider"></div>
         <div class="profile-stat-row">
           <div class="p-stat"><div class="p-stat-num">7+</div><div class="p-stat-label">Years</div></div>
-          <div class="p-stat"><div class="p-stat-num">15+</div><div class="p-stat-label">Projects</div></div>
+          <div class="p-stat"><div class="p-stat-num">17+</div><div class="p-stat-label">Projects</div></div>
           <div class="p-stat"><div class="p-stat-num">5</div><div class="p-stat-label">Certs</div></div>
         </div>
       </div>
@@ -700,7 +700,7 @@
 
 <div class="stats-bar">
   <div class="stat reveal"><div class="stat-num" id="s0">7+</div><div class="stat-label">Years Experience</div></div>
-  <div class="stat reveal"><div class="stat-num" id="s1">15+</div><div class="stat-label">Projects Shipped</div></div>
+  <div class="stat reveal"><div class="stat-num" id="s1">17+</div><div class="stat-label">Projects Shipped</div></div>
   <div class="stat reveal"><div class="stat-num" id="s2">4</div><div class="stat-label">Companies</div></div>
   <div class="stat reveal"><div class="stat-num" id="s3">5</div><div class="stat-label">Certifications</div></div>
   <div class="stat reveal"><div class="stat-num" id="s4">3</div><div class="stat-label">Freelance Apps</div></div>
@@ -711,13 +711,37 @@
     <div class="section-label reveal">// featured work</div>
     <h2 class="section-title reveal">Projects · <span>Real Impact</span></h2>
     <div class="tab-nav reveal">
-      <button class="tab-btn active" onclick="switchTab('office')">🏢 Office Projects</button>
+      <button class="tab-btn active" onclick="switchTab('office')">🏢 Office Projects (7)</button>
       <button class="tab-btn" onclick="switchTab('personal')">💡 Personal</button>
       <button class="tab-btn" onclick="switchTab('freelance')">💼 Freelance</button>
       <button class="tab-btn" onclick="switchTab('govt')">🏛️ Government</button>
     </div>
 
     <div id="tab-office" class="tab-content active">
+      <div class="project-card reveal">
+        <span class="project-type type-kotlin">Fintech Onboarding · Kotlin · Integra Micro</span>
+        <h3 class="project-title">BC Onboarding</h3>
+        <p class="project-desc">Multi-role Business Correspondent onboarding app connecting branch executives, applicants and ROC reviewers through one traceable digital workflow.</p>
+        <ul class="project-features">
+          <li>Role-based ABE, BC and ROC journeys with OTP login</li>
+          <li>PAN verification, fee payment, survey and liveness checks</li>
+          <li>Dynamic ROC questionnaire with approval or rejection</li>
+          <li>Online/offline PRF submission and DocuExec digital signing</li>
+        </ul>
+        <div class="project-tags"><span class="tag">Kotlin</span><span class="tag">MVVM</span><span class="tag">CameraX</span><span class="tag">DocuExec</span></div>
+      </div>
+      <div class="project-card reveal">
+        <span class="project-type type-kotlin">MSME Onboarding · Kotlin · Integra Micro</span>
+        <h3 class="project-title">IMOO</h3>
+        <p class="project-desc">Field-first MSME onboarding platform for discovering businesses, verifying identity and registration records, and completing assisted onboarding online or offline.</p>
+        <ul class="project-features">
+          <li>Nearby MSME discovery by GPS, region and pincode</li>
+          <li>Udyam, PAN and GST verification with eligibility checks</li>
+          <li>CameraX + ML Kit document scanning and auto-fill</li>
+          <li>Room offline storage, secure sync and biometric access</li>
+        </ul>
+        <div class="project-tags"><span class="tag">Kotlin</span><span class="tag">Room</span><span class="tag">ML Kit</span><span class="tag">MVVM</span></div>
+      </div>
       <div class="project-card reveal">
         <span class="project-type type-office">Fintech · Java · Integra Micro</span>
         <h3 class="project-title">IBKART</h3>
@@ -729,6 +753,28 @@
           <li>Keycloak auth, OneSignal push, AES encryption</li>
         </ul>
         <div class="project-tags"><span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Keycloak</span><span class="tag">MVVM</span></div>
+      </div>
+      <div class="project-card reveal">
+        <span class="project-type type-kotlin">Banking · Kotlin · Integra Micro</span>
+        <h3 class="project-title">iLoanRepayment</h3>
+        <p class="project-desc">Field loan recovery app — agents collect repayments on-site, sync offline to bank core system.</p>
+        <ul class="project-features">
+          <li>Taluk-based customer assignment</li>
+          <li>Offline-capable with auto-sync</li>
+          <li>Kotlin + Coroutines + MVVM</li>
+        </ul>
+        <div class="project-tags"><span class="tag">Kotlin</span><span class="tag">Coroutines</span><span class="tag">Offline Sync</span></div>
+      </div>
+      <div class="project-card reveal">
+        <span class="project-type type-kotlin">Attendance · Kotlin · Integra Micro</span>
+        <h3 class="project-title">iASWeb – Smart Attendance</h3>
+        <p class="project-desc">QR + TOTP based attendance for bank employees — prevents buddy punching.</p>
+        <ul class="project-features">
+          <li>Dynamic QR code, time-based OTP</li>
+          <li>Location & branch verification</li>
+          <li>Real-time admin dashboard, payroll integration</li>
+        </ul>
+        <div class="project-tags"><span class="tag">Kotlin</span><span class="tag">TOTP</span><span class="tag">QR Code</span><span class="tag">MVVM</span></div>
       </div>
       <div class="project-card reveal">
         <span class="project-type type-office">OCR · Java · ERBrains</span>
@@ -752,28 +798,6 @@
           <li>NAVISION integration via C# middleware</li>
         </ul>
         <div class="project-tags"><span class="tag">Java</span><span class="tag">NAVISION</span><span class="tag">Firebase TTS</span><span class="tag">C#</span></div>
-      </div>
-      <div class="project-card reveal">
-        <span class="project-type type-kotlin">Banking · Kotlin · Integra Micro</span>
-        <h3 class="project-title">iLoanRepayment</h3>
-        <p class="project-desc">Field loan recovery app — agents collect repayments on-site, sync offline to bank core system.</p>
-        <ul class="project-features">
-          <li>Taluk-based customer assignment</li>
-          <li>Offline-capable with auto-sync</li>
-          <li>Kotlin + Coroutines + MVVM</li>
-        </ul>
-        <div class="project-tags"><span class="tag">Kotlin</span><span class="tag">Coroutines</span><span class="tag">Offline Sync</span></div>
-      </div>
-      <div class="project-card reveal">
-        <span class="project-type type-kotlin">Attendance · Kotlin · Integra Micro</span>
-        <h3 class="project-title">iASWeb – Smart Attendance</h3>
-        <p class="project-desc">QR + TOTP based attendance for bank employees — prevents buddy punching.</p>
-        <ul class="project-features">
-          <li>Dynamic QR code, time-based OTP</li>
-          <li>Location & branch verification</li>
-          <li>Real-time admin dashboard, payroll integration</li>
-        </ul>
-        <div class="project-tags"><span class="tag">Kotlin</span><span class="tag">TOTP</span><span class="tag">QR Code</span><span class="tag">MVVM</span></div>
       </div>
     </div>
 
@@ -1125,7 +1149,7 @@
   // ===== COUNTER ANIMATION =====
   const statsObserver = new IntersectionObserver(entries => {
     if (!entries[0].isIntersecting) return;
-    [['s0','7+'],['s1','15+'],['s2','4'],['s3','5'],['s4','3']].forEach(([id, val]) => {
+    [['s0','7+'],['s1','17+'],['s2','4'],['s3','5'],['s4','3']].forEach(([id, val]) => {
       const el = document.getElementById(id);
       if (!el) return;
       const targetNum = parseFloat(val);
